@@ -16,9 +16,11 @@ public class Gerador : MonoBehaviour
 
             int ponteiro = Random.Range(0, MeusObjetos.Count);
 
-            Instantiate(MeusObjetos[ponteiro],
+            GameObject novoMonstro = Instantiate(MeusObjetos[ponteiro],
             novapos,
             Quaternion.identity);
+            Destroy(novoMonstro,3f);
+
             meuTempo = 0;
         }
         

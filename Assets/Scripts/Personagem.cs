@@ -1,9 +1,18 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Personagem : MonoBehaviour
 {
     public int vida = 10;
+    private Controlador CJ;
+    public GameObject MeuTiro;
 
+    public void Start()
+    {
+        CJ = GameObject.
+            FindGameObjectWithTag("GameController"). 
+            GetComponent<Controlador>();
+    }
 
     private void OnCollisionEnter2D(Collision2D colisao)
     {
@@ -22,7 +31,23 @@ public class Personagem : MonoBehaviour
 
     private void Update()
     {
-        Mover();
+        if (CJ.InformarJogo() == true)
+        {
+            Mover();
+            Atirar();
+        }
+        
+    }
+
+    void Atirar()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            GameObject Tiro1 = Instantiate(MeuTiro,
+                transform.position,
+                Quaternion.identity);
+            Destroy(Tiro1, 3f);
+        }
     }
 
     void Mover()
